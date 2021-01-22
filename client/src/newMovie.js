@@ -32,7 +32,7 @@ const form = `
 `;
 
 const newMovie = () => {
-  $(document).on('submit, "form#form-movie', (e) => {
+  $(document).on('submit, "form#form-movie', async (e) => {
     e.preventDefault();
     console.log($("#genre").val());
     console.log($("#title").val());
@@ -49,16 +49,16 @@ const newMovie = () => {
       academyAwardWinner: $(`input[name="Academy Award winner"]:checked`).val(),
     };
 
-    const response = $.ajax({
+    const response = await $.ajax({
       type: "POST",
-      url: "http://localhost:3000/movies/new-movie",
+      url: "http://localhost:1234/movies/new-movie",
       contentType: "application/json",
       data: JSON.stringify(requestBody),
-    }).then((data) => {
-      console.log("data", data);
-      console.log(`This is the response I get back!: ${data}`);
     });
+    console.log("response", response);
+    console.log(`This is the response I get back!: ${response}`);
   });
+
   return form;
 };
 
