@@ -1,4 +1,7 @@
+import loginUser from "./loginUser";
+
 const form = `
+
     <form id="new-user">
         <div class="form-group">
             <label for="username">Username</label>
@@ -21,14 +24,20 @@ const newUser = () => {
       username: $("input[name='username']").val(),
       password: $("input[name='password']").val(),
     };
-    console.log("formData", formData);
-    const response = await $.ajax({
-      type: "POST",
-      url: "/api/users/register",
-      contentType: "application/json",
-      data: JSON.stringify(formData),
-    });
-    console.log("response", response);
+
+    try {
+      const response = await $.ajax({
+        type: "POST",
+        url: "/api/users/register",
+        contentType: "application/json",
+        data: JSON.stringify(formData),
+      });
+
+      $("body").empty();
+      $("body").append(loginUser());
+    } catch (err) {
+      $("body").append("<div>Could not create user</div>");
+    }
   });
   return form;
 };

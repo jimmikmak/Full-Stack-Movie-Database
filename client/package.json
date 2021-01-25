@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "normalize.css": "^8.0.1",
     "regenerator-runtime": "^0.13.7"
   },
   "proxy": "http://localhost:3000",

@@ -1,11 +1,14 @@
 const mongoose = require("mongoose");
 
-const moviesSchema = mongoose.Schema({
+const movieSchema = mongoose.Schema({
   genre: String,
   title: String,
-  leadActor: String,
   decade: Number,
   academyAward: Boolean,
+  movieId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "user",
+  },
 });
 
-module.exports = mongoose.model("MovieCollection", moviesSchema);
+module.exports = mongoose.model("movie", movieSchema);

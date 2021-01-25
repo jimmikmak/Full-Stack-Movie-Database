@@ -880,7 +880,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-var form = "\n<form id=\"form-movie\">\n  <div class=\"form-group\">\n    <label for=\"genre\">Genre</label>\n    <input type=\"text\" class=\"form-control\" id=\"genre\" placeholder=\"Enter a movie genre\" name=\"genre\">\n  </div>\n  <div class=\"form-group\">\n    <label for=\"title\">Title</label>\n    <input type=\"text\" class=\"form-control\" id=\"title\" placeholder=\"Enter a movie title\" name=\"title\">\n  </div>\n  <div class=\"form-group\">\n    <label for =\"lead-actor\">Lead Actor</label>\n    <input type=\"text\" class=\"form-control\" id=\"lead-actor\" placeholder=\"Enter name of lead actor\" name=\"lead-actor\">\n  </div>\n  <div class=\"form-group\">\n    <label for =\"decade\">Decade</label>\n    <input type=\"text\" class=\"form-control\" id=\"decade\" placeholder=\"Enter movie decade\" name=\"decade\">\n  </div>\n  <fieldset class=\"form-group\">\n    <legend class=\"col-form-label\">Academy Award winner?</legend>\n      <div class=\"form-check form-check-inline\">\n      <input class=\"form-check-input\" type=\"radio\" id=\"academyAwardYes\" name=\"academyAwardYes\" value=\"true\">\n    <label class=\"form-check-label\" for=\"academyAwardYes\">Yes</label>\n    </div>\n    <div class=\"form-check form-check-inline\">\n      <input class=\"form-check-input\" type=\"radio\" id=\"academyAwardNo\" name=\"academyAwardNo\" value=\"true\">\n    <label class=\"form-check-label\" for=\"academyAwardNo\">No</label>\n    </div>\n  </fieldset>\n  <button type=\"submit\" class=\"btn btn-primary\">Find Movie</button>\n</form>\n";
+var form = "\n<form id=\"form-movie\">\n\n  <div class=\"form-group\">\n    <label for=\"genre\">Genre</label>\n    <input type=\"text\" class=\"form-control\" id=\"genre\" placeholder=\"Enter a movie genre\" name=\"genre\">\n  </div>\n  <div class=\"form-group\">\n    <label for=\"title\">Title</label>\n    <input type=\"text\" class=\"form-control\" id=\"title\" placeholder=\"Enter a movie title\" name=\"title\">\n  </div>\n  <div class=\"form-group\">\n    <label for =\"decade\">Decade</label>\n    <input type=\"text\" class=\"form-control\" id=\"decade\" placeholder=\"Enter movie decade\" name=\"decade\">\n  </div>\n  <fieldset class=\"form-group\">\n    <legend class=\"col-form-label\">Academy Award?</legend>\n      <div class=\"form-check form-check-inline\">\n      <input class=\"form-check-input\" type=\"radio\" id=\"academyAwardYes\" name=\"academyAwardYes\" value=\"true\">\n    <label class=\"form-check-label\" for=\"academyAwardYes\">Yes</label>\n    </div>\n    <div class=\"form-check form-check-inline\">\n      <input class=\"form-check-input\" type=\"radio\" id=\"academyAwardNo\" name=\"academyAwardNo\" value=\"true\">\n    <label class=\"form-check-label\" for=\"academyAwardNo\">No</label>\n    </div>\n  </fieldset>\n  <button type=\"submit\" class=\"btn btn-primary\">Save</button>\n</form>\n";
 
 var newMovie = function newMovie() {
   $(document).on('submit, "form#form-movie', /*#__PURE__*/function () {
@@ -934,64 +934,6 @@ var newMovie = function newMovie() {
 
 var _default = newMovie;
 exports.default = _default;
-},{}],"src/user/loginUser.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-var form = "\n    <form id=\"login-user\">\n        <div class=\"form-group\">\n            <label for=\"username\">Username</label>\n            <input type=\"text\" class=\"form-control\" placeholder=\"Please enter username\" name=\"username\">\n        </div>\n        <div class=\"form-group\">\n            <label for=\"password\">Password</label>\n            <input type=\"password\" class=\"form-control\" placeholder=\"Please enter password\" name=\"password\">\n        </div>\n        <button type=\"submit\" class=\"btn btn-primary\">Submit</button>\n    </form>\n";
-
-var loginUser = function loginUser() {
-  $(document).on("submit", "#login-user", /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event) {
-      var formData, response;
-      return regeneratorRuntime.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              console.log("event", event);
-              event.preventDefault();
-              formData = {
-                username: $("input[name='username']").val(),
-                password: $("input[name='password']").val()
-              };
-              console.log("formData", formData);
-              _context.next = 6;
-              return $.ajax({
-                type: "POST",
-                url: "/api/users/login",
-                contentType: "application/json",
-                data: JSON.stringify(formData)
-              });
-
-            case 6:
-              response = _context.sent;
-              console.log("response", response);
-
-            case 8:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }));
-
-    return function (_x) {
-      return _ref.apply(this, arguments);
-    };
-  }());
-  return form;
-};
-
-var _default = loginUser;
-exports.default = _default;
 },{}],"src/user/newUser.js":[function(require,module,exports) {
 "use strict";
 
@@ -1000,11 +942,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+var _loginUser = _interopRequireDefault(require("./loginUser"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-var form = "\n    <form id=\"new-user\">\n        <div class=\"form-group\">\n            <label for=\"username\">Username</label>\n            <input type=\"text\" class=\"form-control\" placeholder=\"Please enter username\" name=\"username\">\n        </div>\n        <div class=\"form-group\">\n            <label for=\"password\">Password</label>\n            <input type=\"password\" class=\"form-control\" placeholder=\"Please enter password\" name=\"password\">\n        </div>\n        <button type=\"submit\" class=\"btn btn-primary\">Submit</button>\n    </form>\n";
+var form = "\n\n    <form id=\"new-user\">\n        <div class=\"form-group\">\n            <label for=\"username\">Username</label>\n            <input type=\"text\" class=\"form-control\" placeholder=\"Please enter username\" name=\"username\">\n        </div>\n        <div class=\"form-group\">\n            <label for=\"password\">Password</label>\n            <input type=\"password\" class=\"form-control\" placeholder=\"Please enter password\" name=\"password\">\n        </div>\n        <button type=\"submit\" class=\"btn btn-primary\">Submit</button>\n    </form>\n";
 
 var newUser = function newUser() {
   $(document).on("submit", "#new-user", /*#__PURE__*/function () {
@@ -1020,7 +966,7 @@ var newUser = function newUser() {
                 username: $("input[name='username']").val(),
                 password: $("input[name='password']").val()
               };
-              console.log("formData", formData);
+              _context.prev = 3;
               _context.next = 6;
               return $.ajax({
                 type: "POST",
@@ -1031,14 +977,22 @@ var newUser = function newUser() {
 
             case 6:
               response = _context.sent;
-              console.log("response", response);
+              $("body").empty();
+              $("body").append((0, _loginUser.default)());
+              _context.next = 14;
+              break;
 
-            case 8:
+            case 11:
+              _context.prev = 11;
+              _context.t0 = _context["catch"](3);
+              $("body").append("<div>Could not create user</div>");
+
+            case 14:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee);
+      }, _callee, null, [[3, 11]]);
     }));
 
     return function (_x) {
@@ -1050,7 +1004,82 @@ var newUser = function newUser() {
 
 var _default = newUser;
 exports.default = _default;
-},{}],"src/app.js":[function(require,module,exports) {
+},{"./loginUser":"src/user/loginUser.js"}],"src/user/loginUser.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _newUser = _interopRequireDefault(require("./newUser"));
+
+var _newMovie = _interopRequireDefault(require("../newMovie"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+var form = "\n    <form id=\"login-user\">\n        <div class=\"form-group\">\n            <label for=\"username\">Username</label>\n            <input type=\"text\" class=\"form-control\" placeholder=\"Please enter username\" name=\"username\">\n        </div>\n        <div class=\"form-group\">\n            <label for=\"password\">Password</label>\n            <input type=\"password\" class=\"form-control\" placeholder=\"Please enter password\" name=\"password\">\n        </div>\n        <button type=\"submit\" class=\"btn btn-primary\">Submit</button>\n    </form>\n    <button id=\"register-new-user\" class=\"btn btn-primary\">Register new user</button>\n";
+
+var loginUser = function loginUser() {
+  $(document).on("submit", "#login-user", /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event) {
+      var formData, response;
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              event.preventDefault();
+              formData = {
+                username: $("input[name='username']").val(),
+                password: $("input[name='password']").val()
+              };
+              _context.prev = 2;
+              _context.next = 5;
+              return $.ajax({
+                type: "POST",
+                url: "/api/users/login",
+                contentType: "application/json",
+                data: JSON.stringify(formData)
+              });
+
+            case 5:
+              response = _context.sent;
+              $("body").empty();
+              $("body").append((0, _newMovie.default)());
+              _context.next = 13;
+              break;
+
+            case 10:
+              _context.prev = 10;
+              _context.t0 = _context["catch"](2);
+              $("body").append("<div>Invalid user/pass provided!</div>");
+
+            case 13:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[2, 10]]);
+    }));
+
+    return function (_x) {
+      return _ref.apply(this, arguments);
+    };
+  }());
+  return form;
+};
+
+$(document).on("click", "#register-new-user", function () {
+  $("body").empty();
+  $("body").append((0, _newUser.default)());
+});
+var _default = loginUser;
+exports.default = _default;
+},{"./newUser":"src/user/newUser.js","../newMovie":"src/newMovie.js"}],"src/app.js":[function(require,module,exports) {
 "use strict";
 
 require("regenerator-runtime/runtime");
@@ -1094,7 +1123,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53048" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50041" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
