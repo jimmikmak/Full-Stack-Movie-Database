@@ -1,5 +1,5 @@
 const form = `
-<form id="form-movie">
+<form>
   <div class="form-group">
     <label for="genre">Genre</label>
     <input type="text" class="form-control" id="genre" placeholder="Enter a movie genre" name="genre">
@@ -23,34 +23,32 @@ const form = `
     <label class="form-check-label" for="academyAwardNo">No</label>
     </div>
   </fieldset>
-  <button type="submit" class="btn btn-primary">Save</button>
+  <button type="button" id="save-movie" class="btn btn-primary">Save movie</button>
 </form>
 `;
 
 const newMovie = () => {
-  $(document).on('submit, "form#form-movie', async (e) => {
+  $(document).on("click", "#save-movie", async (e) => {
     e.preventDefault();
     console.log($("#genre").val());
     console.log($("#title").val());
     console.log($("#decade").val());
-    console.log($(`input[name="Academy Award"]:checked`).val());
-    console.log("Data entered");
+    console.log($(`input[name="Academy Award?"]:checked`).val());
 
     const requestBody = {
       genre: $("#genre").val(),
       title: $("#title").val(),
       decade: $("#decade").val(),
-      academyAwardWinner: $(`input[name="Academy Award"]:checked`).val(),
+      academyAwardWinner: $(`input[name="Academy Award?"]:checked`).val(),
     };
 
     const response = await $.ajax({
       type: "POST",
-      url: "http://localhost:1234/movies/new-movie",
+      url: "http://localhost:1234/api/movies/new-movie",
       contentType: "application/json",
       data: JSON.stringify(requestBody),
     });
     console.log("response", response);
-    console.log(`This is the response I get back!: ${response}`);
   });
 
   return form;

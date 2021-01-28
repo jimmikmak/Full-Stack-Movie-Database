@@ -29,7 +29,7 @@ const form = `
             <label for="password">Password</label>
             <input type="password" class="form-control" placeholder="Please enter password" name="password">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Log-in</button>
     </form>
     <button id="register-new-user" class="btn btn-primary">Register new user</button>
 `;

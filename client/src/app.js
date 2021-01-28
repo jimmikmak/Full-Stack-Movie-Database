@@ -5,5 +5,5 @@ import newUser from "./user/newUser";
 
 console.log("Check if this works");
 
-$("body").prepend(newMovie());
+// $("body").prepend(newMovie());
 $("body").prepend(loginUser());

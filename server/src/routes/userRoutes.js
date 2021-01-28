@@ -28,6 +28,7 @@ router.post("/login", (request, response) => {
         request.session.user = {
           id: userData._id,
         };
+        request.session.loggedIn = true;
         console.log("request.session", request.session);
         response.send("logged in");
       } else {
