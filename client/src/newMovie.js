@@ -1,6 +1,5 @@
 const form = `
 <form id="form-movie">
-
   <div class="form-group">
     <label for="genre">Genre</label>
     <input type="text" class="form-control" id="genre" placeholder="Enter a movie genre" name="genre">
@@ -33,17 +32,15 @@ const newMovie = () => {
     e.preventDefault();
     console.log($("#genre").val());
     console.log($("#title").val());
-    console.log($("#lead-actor").val());
     console.log($("#decade").val());
-    console.log($(`input[name="Academy Award winner"]:checked`).val());
+    console.log($(`input[name="Academy Award"]:checked`).val());
     console.log("Data entered");
 
     const requestBody = {
       genre: $("#genre").val(),
       title: $("#title").val(),
-      leadActor: $("#lead-actor").val(),
       decade: $("#decade").val(),
-      academyAwardWinner: $(`input[name="Academy Award winner"]:checked`).val(),
+      academyAwardWinner: $(`input[name="Academy Award"]:checked`).val(),
     };
 
     const response = await $.ajax({

@@ -2,6 +2,24 @@ import newUser from "./newUser";
 import newMovie from "../newMovie";
 
 const form = `
+<header>
+    <nav>
+      <div class="row">
+        <img src="/client/images/vector60-1238-01.png" alt="movie-ticket logo" class="logo">
+        <ul class="main-nav">
+          <li><a href="#">Custom library</a></li>
+          <li><a href="#">Wishlist</a></li>
+          <li><a href="#">Movie Checklist</a></li>
+          <li><a href="#">Edit Database</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="hero-text-box">
+      <h1>Cinephile Personal Movie Database</h1>
+      <a class="btn btn-full" href="#">Log-in</a>
+      <a class="btn btn-ghost" href="#">Save movie</a>
+    </div>
+  </header>
     <form id="login-user">
         <div class="form-group">
             <label for="username">Username</label>

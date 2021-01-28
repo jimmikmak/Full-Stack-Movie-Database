@@ -880,7 +880,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-var form = "\n<form id=\"form-movie\">\n\n  <div class=\"form-group\">\n    <label for=\"genre\">Genre</label>\n    <input type=\"text\" class=\"form-control\" id=\"genre\" placeholder=\"Enter a movie genre\" name=\"genre\">\n  </div>\n  <div class=\"form-group\">\n    <label for=\"title\">Title</label>\n    <input type=\"text\" class=\"form-control\" id=\"title\" placeholder=\"Enter a movie title\" name=\"title\">\n  </div>\n  <div class=\"form-group\">\n    <label for =\"decade\">Decade</label>\n    <input type=\"text\" class=\"form-control\" id=\"decade\" placeholder=\"Enter movie decade\" name=\"decade\">\n  </div>\n  <fieldset class=\"form-group\">\n    <legend class=\"col-form-label\">Academy Award?</legend>\n      <div class=\"form-check form-check-inline\">\n      <input class=\"form-check-input\" type=\"radio\" id=\"academyAwardYes\" name=\"academyAwardYes\" value=\"true\">\n    <label class=\"form-check-label\" for=\"academyAwardYes\">Yes</label>\n    </div>\n    <div class=\"form-check form-check-inline\">\n      <input class=\"form-check-input\" type=\"radio\" id=\"academyAwardNo\" name=\"academyAwardNo\" value=\"true\">\n    <label class=\"form-check-label\" for=\"academyAwardNo\">No</label>\n    </div>\n  </fieldset>\n  <button type=\"submit\" class=\"btn btn-primary\">Save</button>\n</form>\n";
+var form = "\n<form id=\"form-movie\">\n  <div class=\"form-group\">\n    <label for=\"genre\">Genre</label>\n    <input type=\"text\" class=\"form-control\" id=\"genre\" placeholder=\"Enter a movie genre\" name=\"genre\">\n  </div>\n  <div class=\"form-group\">\n    <label for=\"title\">Title</label>\n    <input type=\"text\" class=\"form-control\" id=\"title\" placeholder=\"Enter a movie title\" name=\"title\">\n  </div>\n  <div class=\"form-group\">\n    <label for =\"decade\">Decade</label>\n    <input type=\"text\" class=\"form-control\" id=\"decade\" placeholder=\"Enter movie decade\" name=\"decade\">\n  </div>\n  <fieldset class=\"form-group\">\n    <legend class=\"col-form-label\">Academy Award?</legend>\n      <div class=\"form-check form-check-inline\">\n      <input class=\"form-check-input\" type=\"radio\" id=\"academyAwardYes\" name=\"academyAwardYes\" value=\"true\">\n    <label class=\"form-check-label\" for=\"academyAwardYes\">Yes</label>\n    </div>\n    <div class=\"form-check form-check-inline\">\n      <input class=\"form-check-input\" type=\"radio\" id=\"academyAwardNo\" name=\"academyAwardNo\" value=\"true\">\n    <label class=\"form-check-label\" for=\"academyAwardNo\">No</label>\n    </div>\n  </fieldset>\n  <button type=\"submit\" class=\"btn btn-primary\">Save</button>\n</form>\n";
 
 var newMovie = function newMovie() {
   $(document).on('submit, "form#form-movie', /*#__PURE__*/function () {
@@ -893,18 +893,16 @@ var newMovie = function newMovie() {
               e.preventDefault();
               console.log($("#genre").val());
               console.log($("#title").val());
-              console.log($("#lead-actor").val());
               console.log($("#decade").val());
-              console.log($("input[name=\"Academy Award winner\"]:checked").val());
+              console.log($("input[name=\"Academy Award\"]:checked").val());
               console.log("Data entered");
               requestBody = {
                 genre: $("#genre").val(),
                 title: $("#title").val(),
-                leadActor: $("#lead-actor").val(),
                 decade: $("#decade").val(),
-                academyAwardWinner: $("input[name=\"Academy Award winner\"]:checked").val()
+                academyAwardWinner: $("input[name=\"Academy Award\"]:checked").val()
               };
-              _context.next = 10;
+              _context.next = 9;
               return $.ajax({
                 type: "POST",
                 url: "http://localhost:1234/movies/new-movie",
@@ -912,12 +910,12 @@ var newMovie = function newMovie() {
                 data: JSON.stringify(requestBody)
               });
 
-            case 10:
+            case 9:
               response = _context.sent;
               console.log("response", response);
               console.log("This is the response I get back!: ".concat(response));
 
-            case 13:
+            case 12:
             case "end":
               return _context.stop();
           }
@@ -1022,7 +1020,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-var form = "\n    <form id=\"login-user\">\n        <div class=\"form-group\">\n            <label for=\"username\">Username</label>\n            <input type=\"text\" class=\"form-control\" placeholder=\"Please enter username\" name=\"username\">\n        </div>\n        <div class=\"form-group\">\n            <label for=\"password\">Password</label>\n            <input type=\"password\" class=\"form-control\" placeholder=\"Please enter password\" name=\"password\">\n        </div>\n        <button type=\"submit\" class=\"btn btn-primary\">Submit</button>\n    </form>\n    <button id=\"register-new-user\" class=\"btn btn-primary\">Register new user</button>\n";
+var form = "\n<header>\n    <nav>\n      <div class=\"row\">\n        <img src=\"/client/images/vector60-1238-01.png\" alt=\"movie-ticket logo\" class=\"logo\">\n        <ul class=\"main-nav\">\n          <li><a href=\"#\">Custom library</a></li>\n          <li><a href=\"#\">Wishlist</a></li>\n          <li><a href=\"#\">Movie Checklist</a></li>\n          <li><a href=\"#\">Edit Database</a></li>\n        </ul>\n      </div>\n    </nav>\n    <div class=\"hero-text-box\">\n      <h1>Cinephile Personal Movie Database</h1>\n      <a class=\"btn btn-full\" href=\"#\">Log-in</a>\n      <a class=\"btn btn-ghost\" href=\"#\">Save movie</a>\n    </div>\n  </header>\n    <form id=\"login-user\">\n        <div class=\"form-group\">\n            <label for=\"username\">Username</label>\n            <input type=\"text\" class=\"form-control\" placeholder=\"Please enter username\" name=\"username\">\n        </div>\n        <div class=\"form-group\">\n            <label for=\"password\">Password</label>\n            <input type=\"password\" class=\"form-control\" placeholder=\"Please enter password\" name=\"password\">\n        </div>\n        <button type=\"submit\" class=\"btn btn-primary\">Submit</button>\n    </form>\n    <button id=\"register-new-user\" class=\"btn btn-primary\">Register new user</button>\n";
 
 var loginUser = function loginUser() {
   $(document).on("submit", "#login-user", /*#__PURE__*/function () {
@@ -1123,7 +1121,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50041" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55235" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
