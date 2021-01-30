@@ -15,11 +15,11 @@ const form = `
   <fieldset class="form-group">
     <legend class="col-form-label">Academy Award?</legend>
       <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" id="academyAwardYes" name="academyAwardYes" value="true">
+      <input class="form-check-input" type="radio" id="academyAwardYes" name="academyAward" value="true">
     <label class="form-check-label" for="academyAwardYes">Yes</label>
     </div>
     <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" id="academyAwardNo" name="academyAwardNo" value="true">
+      <input class="form-check-input" type="radio" id="academyAwardNo" name="academyAward" value="false">
     <label class="form-check-label" for="academyAwardNo">No</label>
     </div>
   </fieldset>
@@ -33,13 +33,13 @@ const newMovie = () => {
     console.log($("#genre").val());
     console.log($("#title").val());
     console.log($("#decade").val());
-    console.log($(`input[name="Academy Award?"]:checked`).val());
+    console.log($(`input[name="academyAward"]:checked`).val());
 
     const requestBody = {
       genre: $("#genre").val(),
       title: $("#title").val(),
       decade: $("#decade").val(),
-      academyAwardWinner: $(`input[name="Academy Award?"]:checked`).val(),
+      academyAward: $(`input[name="academyAward"]:checked`).val(),
     };
 
     const response = await $.ajax({
@@ -49,6 +49,12 @@ const newMovie = () => {
       data: JSON.stringify(requestBody),
     });
     console.log("response", response);
+    const movies = await $.ajax({
+      type: "GET",
+      url: "http://localhost:1234/api/movies/user",
+      contentType: "application/json",
+      data: JSON.stringify(requestBody),
+    });
   });
 
   return form;

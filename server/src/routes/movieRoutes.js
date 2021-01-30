@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.use((request, response, next) => {
   console.log("request user router:", request.session);
-  if (!request.session.user) {
+  if (!request.session.userId) {
     response.status(404).send("please login");
   } else {
     next();
@@ -19,16 +19,21 @@ router.get("/_health", (request, response) => {
 });
 
 router.post("/new-movie", (request, response) => {
-  if (request.session.loggedIn === true) {
-    const requestBody = request.body;
-    MoviesApi.create(requestBody).then((data) => {
-      console.log("This movie was added successfully!");
-      console.log(data);
-    });
-    response.send("This movie was added successfully!");
-  } else {
-    response.status(401).send("User is not logged in!!");
-  }
+  const requestBody = request.body;
+  requestBody.userId = request.session.userId;
+  MoviesApi.create(requestBody).then((data) => {
+    console.log("This movie was added successfully!");
+    console.log(data);
+  });
+  response.send("This movie was added successfully!");
+});
+
+router.get("/user", (request, response) => {
+  MoviesApi.find({
+    userId: request.session.userId,
+  }).then((movies) => {
+    response.send(movies);
+  });
 });
 
 module.exports = router;

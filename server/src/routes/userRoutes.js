@@ -25,10 +25,8 @@ router.post("/login", (request, response) => {
       );
       if (checkHashPassword) {
         console.log("request.session", request.session);
-        request.session.user = {
-          id: userData._id,
-        };
-        request.session.loggedIn = true;
+
+        request.session.userId = userData._id;
         console.log("request.session", request.session);
         response.send("logged in");
       } else {
@@ -41,7 +39,7 @@ router.post("/login", (request, response) => {
 });
 
 router.get("/logout", (request, response) => {
-  request.session.loggedIn = false;
+  delete request.session.userId;
   response.send("User has logged out!");
 });
 
