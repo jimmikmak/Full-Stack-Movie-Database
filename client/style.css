@@ -247,19 +247,19 @@ header {
   width: 100%;
 }
 
-.meals-showcase li {
+.movies-showcase li {
   display: block;
   float: left;
   width: 25%;
 }
 
-.meal-photo {
+.movie-poster {
   width: 100%;
   margin: 0;
   overflow: hidden;
 }
 
-.meal-photo img {
+.movie-poster img {
   width: 100%;
   height: auto;
   transform: scale(1.15);

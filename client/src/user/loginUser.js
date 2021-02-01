@@ -62,56 +62,6 @@ const form = `
     </div>
 </section>
 
-<section class="section-movies">
-      <ul class="movies-showcase">
-        <li>
-          <figure class="movie-poster">
-            <img src="/client/images/back-to-the-future.jpg" alt="movie-poster 1">
-          </figure>
-        </li>
-        <li>
-          <figure class="movie-poster">
-            <img src="/client/images/godfather-III.jpg" alt="movie-poster 2">
-          </figure>
-        </li>
-        <li>
-          <figure class="movie-poster">
-            <img src="/client/images/jaws.jpg" alt="movie-poster 3">
-          </figure>
-        </li>
-        <li>
-          <figure class="movie-poster">
-            <img src="/client/images/jurassic-park.jpg" alt="movie-poster 4">
-          </figure>
-        </li>
-      </ul>
-
-<ul class="movies-showcase">
-        <li>
-          <figure class="movie-poster">
-            <img src="/client/images/Halloween.jpg" alt="movie-poster 5">
-          </figure>
-        </li>
-        <li>
-          <figure class="movie-poster">
-            <img src="/client/images/star-wars-episode-iv.jpg" alt="movie-poster 6">
-          </figure>
-        </li>
-        <li>
-          <figure class="movie-poster">
-            <img src="/client/images/pulp-fiction.jpg" alt="movie-poster 7">
-          </figure>
-        </li>
-        <li>
-          <figure class="movie-poster">
-            <img src="/client/images/indiana-jones-and-the-temple-of-doom.jpg" alt="movie-poster 8">
-          </figure>
-        </li>
-      </ul>
-
-
-</section>
-
 <form id="login-user">
         <div class="form-group">
             <label for="username">Username</label>
