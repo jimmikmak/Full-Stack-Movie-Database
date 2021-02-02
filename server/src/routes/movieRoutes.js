@@ -36,4 +36,14 @@ router.get("/user", (request, response) => {
   });
 });
 
+router.get("/movie-list", (request, response) => {
+  MoviesApi.find()
+    .then((movies) => {
+      response.send(movies);
+    })
+    .catch(() => {
+      response.status(500).send("unable to display movie-list");
+    });
+});
+
 module.exports = router;

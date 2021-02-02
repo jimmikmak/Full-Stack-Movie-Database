@@ -1,5 +1,7 @@
+import movieList from "./movieList";
+
 const form = `
-<form>
+<form id="form-movie">
   <div class="form-group">
     <label for="genre">Genre</label>
     <input type="text" class="form-control" id="genre" placeholder="Enter a movie genre" name="genre">
@@ -23,11 +25,12 @@ const form = `
     <label class="form-check-label" for="academyAwardNo">No</label>
     </div>
   </fieldset>
-  <button type="button" id="save-movie" class="btn btn-primary">Save movie</button>
+  <button type="button" id="save-movie" class="btn btn-outline-secondary">Save movie</button>
 </form>
 `;
 
 const newMovie = () => {
+  $("body").prepend(movieList());
   $(document).on("click", "#save-movie", async (e) => {
     e.preventDefault();
     console.log($("#genre").val());
@@ -48,15 +51,11 @@ const newMovie = () => {
       contentType: "application/json",
       data: JSON.stringify(requestBody),
     });
-    console.log("response", response);
-    const movies = await $.ajax({
-      type: "GET",
-      url: "http://localhost:1234/api/movies/user",
-      contentType: "application/json",
-      data: JSON.stringify(requestBody),
-    });
-  });
 
+    // movieList();
+    $("#new-movie-list").append(`<li>${$("#title").val()}</li>`);
+    console.log("response", response);
+  });
   return form;
 };
 

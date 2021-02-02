@@ -200,8 +200,8 @@ header {
 }
 
 #login-user {
-  /* margin-left: auto;
-  margin-right: auto; */
+  margin-left: auto;
+  margin-right: auto;
   width: 250px;
   padding: 0;
   box-sizing: border-box;
@@ -215,12 +215,13 @@ header {
 }
 
 #register-new-user {
-  /* margin-left: auto;
-  margin-right: auto; */
-  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  /* display: inline-block; */
 }
 
-#form-movie {
+#form-movie,
+#new-movie-list {
   margin-left: auto;
   margin-right: auto;
   width: 250px;
@@ -232,6 +233,16 @@ header {
   font-weight: 300;
   text-rendering: optimizeLegibility;
   margin-top: 50px;
+  display: inline-block;
+}
+
+#form-movie {
+  float: left;
+  padding-left: 25px;
+}
+
+#new-movie-list {
+  padding-left: 125px;
 }
 
 /* --------------------------------------------- */

@@ -868,78 +868,6 @@ try {
   Function("r", "regeneratorRuntime = r")(runtime);
 }
 
-},{}],"src/newMovie.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-var form = "\n<form>\n  <div class=\"form-group\">\n    <label for=\"genre\">Genre</label>\n    <input type=\"text\" class=\"form-control\" id=\"genre\" placeholder=\"Enter a movie genre\" name=\"genre\">\n  </div>\n  <div class=\"form-group\">\n    <label for=\"title\">Title</label>\n    <input type=\"text\" class=\"form-control\" id=\"title\" placeholder=\"Enter a movie title\" name=\"title\">\n  </div>\n  <div class=\"form-group\">\n    <label for =\"decade\">Decade</label>\n    <input type=\"text\" class=\"form-control\" id=\"decade\" placeholder=\"Enter movie decade\" name=\"decade\">\n  </div>\n  <fieldset class=\"form-group\">\n    <legend class=\"col-form-label\">Academy Award?</legend>\n      <div class=\"form-check form-check-inline\">\n      <input class=\"form-check-input\" type=\"radio\" id=\"academyAwardYes\" name=\"academyAward\" value=\"true\">\n    <label class=\"form-check-label\" for=\"academyAwardYes\">Yes</label>\n    </div>\n    <div class=\"form-check form-check-inline\">\n      <input class=\"form-check-input\" type=\"radio\" id=\"academyAwardNo\" name=\"academyAward\" value=\"false\">\n    <label class=\"form-check-label\" for=\"academyAwardNo\">No</label>\n    </div>\n  </fieldset>\n  <button type=\"button\" id=\"save-movie\" class=\"btn btn-primary\">Save movie</button>\n</form>\n";
-
-var newMovie = function newMovie() {
-  $(document).on("click", "#save-movie", /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(e) {
-      var requestBody, response, movies;
-      return regeneratorRuntime.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              e.preventDefault();
-              console.log($("#genre").val());
-              console.log($("#title").val());
-              console.log($("#decade").val());
-              console.log($("input[name=\"academyAward\"]:checked").val());
-              requestBody = {
-                genre: $("#genre").val(),
-                title: $("#title").val(),
-                decade: $("#decade").val(),
-                academyAward: $("input[name=\"academyAward\"]:checked").val()
-              };
-              _context.next = 8;
-              return $.ajax({
-                type: "POST",
-                url: "http://localhost:1234/api/movies/new-movie",
-                contentType: "application/json",
-                data: JSON.stringify(requestBody)
-              });
-
-            case 8:
-              response = _context.sent;
-              console.log("response", response);
-              _context.next = 12;
-              return $.ajax({
-                type: "GET",
-                url: "http://localhost:1234/api/movies/user",
-                contentType: "application/json",
-                data: JSON.stringify(requestBody)
-              });
-
-            case 12:
-              movies = _context.sent;
-
-            case 13:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }));
-
-    return function (_x) {
-      return _ref.apply(this, arguments);
-    };
-  }());
-  return form;
-};
-
-var _default = newMovie;
-exports.default = _default;
 },{}],"src/user/newUser.js":[function(require,module,exports) {
 "use strict";
 
@@ -1010,7 +938,104 @@ var newUser = function newUser() {
 
 var _default = newUser;
 exports.default = _default;
-},{"./loginUser":"src/user/loginUser.js"}],"src/user/loginUser.js":[function(require,module,exports) {
+},{"./loginUser":"src/user/loginUser.js"}],"src/movieList.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var moviesHtml = "\n<ul id=\"new-movie-list\">\n\n</ul>\n";
+
+var movieList = function movieList() {
+  $.ajax({
+    type: "GET",
+    url: "/api/movies/movie-list",
+    contentType: "application/json"
+  }).then(function (movies) {
+    console.log("movies:", movies);
+    var movieListHtml = "";
+    movies.forEach(function (movie) {
+      movieListHtml += "<li>".concat(movie.title, "</li>");
+    });
+    $("#new-movie-list").empty();
+    $("#new-movie-list").append(movieListHtml);
+  });
+  return moviesHtml;
+};
+
+var _default = movieList;
+exports.default = _default;
+},{}],"src/newMovie.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _movieList = _interopRequireDefault(require("./movieList"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+var form = "\n<form id=\"form-movie\">\n  <div class=\"form-group\">\n    <label for=\"genre\">Genre</label>\n    <input type=\"text\" class=\"form-control\" id=\"genre\" placeholder=\"Enter a movie genre\" name=\"genre\">\n  </div>\n  <div class=\"form-group\">\n    <label for=\"title\">Title</label>\n    <input type=\"text\" class=\"form-control\" id=\"title\" placeholder=\"Enter a movie title\" name=\"title\">\n  </div>\n  <div class=\"form-group\">\n    <label for =\"decade\">Decade</label>\n    <input type=\"text\" class=\"form-control\" id=\"decade\" placeholder=\"Enter movie decade\" name=\"decade\">\n  </div>\n  <fieldset class=\"form-group\">\n    <legend class=\"col-form-label\">Academy Award?</legend>\n      <div class=\"form-check form-check-inline\">\n      <input class=\"form-check-input\" type=\"radio\" id=\"academyAwardYes\" name=\"academyAward\" value=\"true\">\n    <label class=\"form-check-label\" for=\"academyAwardYes\">Yes</label>\n    </div>\n    <div class=\"form-check form-check-inline\">\n      <input class=\"form-check-input\" type=\"radio\" id=\"academyAwardNo\" name=\"academyAward\" value=\"false\">\n    <label class=\"form-check-label\" for=\"academyAwardNo\">No</label>\n    </div>\n  </fieldset>\n  <button type=\"button\" id=\"save-movie\" class=\"btn btn-outline-secondary\">Save movie</button>\n</form>\n";
+
+var newMovie = function newMovie() {
+  $("body").prepend((0, _movieList.default)());
+  $(document).on("click", "#save-movie", /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(e) {
+      var requestBody, response;
+      return regeneratorRuntime.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              e.preventDefault();
+              console.log($("#genre").val());
+              console.log($("#title").val());
+              console.log($("#decade").val());
+              console.log($("input[name=\"academyAward\"]:checked").val());
+              requestBody = {
+                genre: $("#genre").val(),
+                title: $("#title").val(),
+                decade: $("#decade").val(),
+                academyAward: $("input[name=\"academyAward\"]:checked").val()
+              };
+              _context.next = 8;
+              return $.ajax({
+                type: "POST",
+                url: "http://localhost:1234/api/movies/new-movie",
+                contentType: "application/json",
+                data: JSON.stringify(requestBody)
+              });
+
+            case 8:
+              response = _context.sent;
+              // movieList();
+              $("#new-movie-list").append("<li>".concat($("#title").val(), "</li>"));
+              console.log("response", response);
+
+            case 11:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function (_x) {
+      return _ref.apply(this, arguments);
+    };
+  }());
+  return form;
+};
+
+var _default = newMovie;
+exports.default = _default;
+},{"./movieList":"src/movieList.js"}],"src/user/loginUser.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -1028,7 +1053,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-var form = "\n<body>\n<header>\n    <nav>\n      <div class=\"row\">\n         <img src=\"/client/images/vector60-1238-01.png\" alt=\"movie-ticket logo\" class=\"logo\">\n          <ul class=\"main-nav\">\n            <li><a href=\"#\">Custom library</a></li>\n            <li><a href=\"#\">Wishlist</a></li>\n            <li><a href=\"#\">Movie Checklist</a></li>\n            <li><a href=\"#\">Edit Database</a></li>\n          </ul>\n      </div>\n    </nav>\n      <div class=\"hero-text-box\">\n            <h1>Cinephile Personal Movie Database</h1>\n              <a class=\"btn btn-full\" href=\"#\">Log-in</a>\n              <a class=\"btn btn-ghost\" href=\"#\">Save movie</a>\n      </div>\n</header>\n\n<section class=\"section-features\">\n      <div class=\"row\">\n            <h2>Keep track of your favourites!</h2>\n              <p class=\"long-copy\">\n              Welcome Cinephiles! We love movies, and we know you love movies, too. Why else would you be here! But how do keep track of which movies you've seen and want to see? Relax, Cinephile Personal Movie Database has got you covered.\n              </p>\n      </div>\n\n      <div class=\"row\">\n        <div class=\"col span-1-of-4 box\">\n          <ion-icon name=\"library-outline\" class=\"icon-big\"></ion-icon>\n            <h3>Custom libraries</h3>\n              <p>\n              Whether you watch a movie a week, or ten a day, CPMD gives you the option of saving custom movie libraries for easy reference. \n              </p>\n      </div>\n        <div class=\"col span-1-of-4 box\">\n          <ion-icon name=\"videocam-outline\" class=\"icon-big\"></ion-icon>\n            <h3>Save movies in any format</h3>\n              <p>   \n              A movie is a movie, right? Sure, but you may like watching streamed content or go old school and throw in a DVD/Blu-ray. With CPMD you can easily record different movie formats.  \n              </p>\n      </div>      \n        <div class=\"col span-1-of-4 box\">\n          <ion-icon name=\"star-outline\" class=\"icon-big\"></ion-icon>\n            <h3>Wishlist categories</h3>\n              <p>\n              So many movies to watch, so little time! Don't worry, CPMD allows you to quickly save movies you haven't seen yet to your own personalised wishlist. You'll get around to them eventually...\n              </p>\n      </div>      \n        <div class=\"col span-1-of-4 box\">\n          <ion-icon name=\"create-outline\" class=\"icon-big\"></ion-icon>\n            <h3>Update and edit with ease</h3>\n              <p>\n              New movies are released every day and if you're like us, you want to watch them ALL!! If your taste in movies changes, add or delete them whenever you like. \n              </p>\n        </div>\n    </div>\n</section>\n\n<form id=\"login-user\">\n        <div class=\"form-group\">\n            <label for=\"username\">Username</label>\n            <input type=\"text\" class=\"form-control\" placeholder=\"Please enter username\" name=\"username\">\n        </div>\n        <div class=\"form-group\">\n            <label for=\"password\">Password</label>\n            <input type=\"password\" class=\"form-control\" placeholder=\"Please enter password\" name=\"password\">\n        </div>\n        <button type=\"submit\" class=\"btn btn-primary\">Log-in</button>\n    </form>\n    <button id=\"register-new-user\" class=\"btn btn-primary\">Register new user</button>\n</body>\n";
+var form = "\n\n<header>\n    <nav>\n      <div class=\"row\">\n         <img src=\"/client/images/vector60-1238-01.png\" alt=\"movie-ticket logo\" class=\"logo\">\n          <ul class=\"main-nav\">\n            <li><a href=\"#\">Custom library</a></li>\n            <li><a href=\"#\">Wishlist</a></li>\n            <li><a href=\"#\">Movie Checklist</a></li>\n            <li><a href=\"#\">Edit Database</a></li>\n          </ul>\n      </div>\n    </nav>\n      <div class=\"hero-text-box\">\n            <h1>Cinephile Personal Movie Database</h1>\n              <a class=\"btn btn-full\" href=\"#\">Log-in</a>\n              <a class=\"btn btn-ghost\" href=\"#\">Save movie</a>\n      </div>\n</header>\n\n<section class=\"section-features\">\n      <div class=\"row\">\n            <h2>Keep track of your favourites!</h2>\n              <p class=\"long-copy\">\n              Welcome Cinephiles! We love movies, and we know you love movies, too. Why else would you be here! But how to keep track of which movies you've seen and want to see? Relax, Cinephile Personal Movie Database has got you covered.\n              </p>\n      </div>\n\n      <div class=\"row\">\n        <div class=\"col span-1-of-4 box\">\n          <ion-icon name=\"library-outline\" class=\"icon-big\"></ion-icon>\n            <h3>Custom libraries</h3>\n              <p>\n              Whether you watch a movie a week, or ten a day, CPMD gives you the option of saving custom movie libraries for easy reference. \n              </p>\n      </div>\n        <div class=\"col span-1-of-4 box\">\n          <ion-icon name=\"videocam-outline\" class=\"icon-big\"></ion-icon>\n            <h3>Save movies in any format</h3>\n              <p>   \n              A movie is a movie, right? Sure, but you may like watching streamed content or go old school and throw in a DVD/Blu-ray. With CPMD you can easily record different movie formats.  \n              </p>\n      </div>      \n        <div class=\"col span-1-of-4 box\">\n          <ion-icon name=\"star-outline\" class=\"icon-big\"></ion-icon>\n            <h3>Wishlist categories</h3>\n              <p>\n              So many movies to watch, so little time! Don't worry, CPMD allows you to quickly save movies you haven't seen yet to your own personalised wishlist. You'll get around to them eventually...\n              </p>\n      </div>      \n        <div class=\"col span-1-of-4 box\">\n          <ion-icon name=\"create-outline\" class=\"icon-big\"></ion-icon>\n            <h3>Update and edit with ease</h3>\n              <p>\n              New movies are released every day and if you're like us, you want to watch them ALL!! If your taste in movies changes, add or delete them whenever you like. \n              </p>\n        </div>\n    </div>\n</section>\n\n<form id=\"login-user\">\n        <div class=\"form-group\">\n            <label for=\"username\">Username</label>\n            <input type=\"text\" class=\"form-control\" placeholder=\"Please enter username\" name=\"username\">\n        </div>\n        <div class=\"form-group\">\n            <label for=\"password\">Password</label>\n            <input type=\"password\" class=\"form-control\" placeholder=\"Please enter password\" name=\"password\">\n        </div>\n        <button type=\"submit\" class=\"btn btn-outline-secondary\">Log-in</button>\n        <button id=\"register-new-user\" class=btn btn-outline-secondary\">Register new user</button>\n    </form>\n    \n";
 
 var loginUser = function loginUser() {
   $(document).on("submit", "#login-user", /*#__PURE__*/function () {
@@ -1090,18 +1115,13 @@ exports.default = _default;
 
 require("regenerator-runtime/runtime");
 
-var _newMovie = _interopRequireDefault(require("./newMovie"));
-
 var _loginUser = _interopRequireDefault(require("./user/loginUser"));
-
-var _newUser = _interopRequireDefault(require("./user/newUser"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-console.log("SNAFU"); // $("body").prepend(newMovie());
-
+console.log("SNAFU");
 $("body").prepend((0, _loginUser.default)());
-},{"regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js","./newMovie":"src/newMovie.js","./user/loginUser":"src/user/loginUser.js","./user/newUser":"src/user/newUser.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"regenerator-runtime/runtime":"node_modules/regenerator-runtime/runtime.js","./user/loginUser":"src/user/loginUser.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -1129,7 +1149,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49881" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49590" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

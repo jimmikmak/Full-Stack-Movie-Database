@@ -2,7 +2,7 @@ import newUser from "./newUser";
 import newMovie from "../newMovie";
 
 const form = `
-<body>
+
 <header>
     <nav>
       <div class="row">
@@ -26,7 +26,7 @@ const form = `
       <div class="row">
             <h2>Keep track of your favourites!</h2>
               <p class="long-copy">
-              Welcome Cinephiles! We love movies, and we know you love movies, too. Why else would you be here! But how do keep track of which movies you've seen and want to see? Relax, Cinephile Personal Movie Database has got you covered.
+              Welcome Cinephiles! We love movies, and we know you love movies, too. Why else would you be here! But how to keep track of which movies you've seen and want to see? Relax, Cinephile Personal Movie Database has got you covered.
               </p>
       </div>
 
@@ -71,10 +71,10 @@ const form = `
             <label for="password">Password</label>
             <input type="password" class="form-control" placeholder="Please enter password" name="password">
         </div>
-        <button type="submit" class="btn btn-primary">Log-in</button>
+        <button type="submit" class="btn btn-outline-secondary">Log-in</button>
+        <button id="register-new-user" class=btn btn-outline-secondary">Register new user</button>
     </form>
-    <button id="register-new-user" class="btn btn-primary">Register new user</button>
-</body>
+    
 `;
 
 const loginUser = () => {
